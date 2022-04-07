@@ -16,10 +16,13 @@ class User
      */
     public function getById(int $id): ?Entity\User
     {
+        $identityMap = new IdentityMap();
         foreach ($this->getDataFromSource(['id' => $id]) as $user) {
-            return $this->createUser($user);
+            if(!$identityMap->get("User", $user['id'])) {
+                $identityMap->add($this->createUser($user));
+            }
+            return $identityMap->get("User", $user['id']);
         }
-
         return null;
     }
 

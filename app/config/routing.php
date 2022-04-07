@@ -1,5 +1,9 @@
 <?php
 
+// Думаю, что в данном файле Front Controller
+// с ним взаимодействуют классы MainController, ProductController,
+// OrderController, UserController
+
 use Controller\MainController;
 use Controller\OrderController;
 use Controller\ProductController;

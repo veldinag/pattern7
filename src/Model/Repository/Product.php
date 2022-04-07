@@ -21,10 +21,13 @@ class Product
         }
 
         $productList = [];
+        $identityMap = new IdentityMap();
         foreach ($this->getDataFromSource(['id' => $ids]) as $item) {
-            $productList[] = new Entity\Product($item['id'], $item['name'], $item['price']);
+            if (!$identityMap->get("Product", $item['id'])) {
+                $identityMap->add(new Entity\Product($item['id'], $item['name'], $item['price']));
+            }
+            $productList = $identityMap->get("Product", $item['id']);
         }
-
         return $productList;
     }
 
@@ -36,8 +39,12 @@ class Product
     public function fetchAll(): array
     {
         $productList = [];
+        $identityMap = new IdentityMap();
         foreach ($this->getDataFromSource() as $item) {
-            $productList[] = new Entity\Product($item['id'], $item['name'], $item['price']);
+            if (!$identityMap->get("Product", $item['id'])) {
+                $identityMap->add(new Entity\Product($item['id'], $item['name'], $item['price']));
+            }
+            $productList = $identityMap->get("Product", $item['id']);
         }
 
         return $productList;

@@ -1,5 +1,8 @@
 <?php
 
+// думаю, что паттерн Registry реализован в данном классе
+// почему он был применен ответить не могу
+
 declare(strict_types = 1);
 
 namespace Framework;
